@@ -218,6 +218,6 @@ Real-time digital pad signature verification
 
 👨‍💻 Contributors
 
-Your Name
+Sahib Singh
 B.Tech CSE – Final Year
 Developer & Researcher
