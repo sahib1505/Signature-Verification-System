@@ -107,14 +107,15 @@ Higher accuracy than SVM
 Stored as: models/cnn_signature.h5
 
 ⚙️ Installation
-1. Clone this repository
-git clone https://github.com/your-username/SignGuard.git
-cd SignGuard
+1. Clone using the web URL
+https://github.com/sahib1505/Signature-Verification-System.git
+cd to the path of project
 
-2. Create virtual environment
+
+3. Create virtual environment
 python -m venv venv
 
-3. Activate environment
+4. Activate environment
 
 Windows:
 
