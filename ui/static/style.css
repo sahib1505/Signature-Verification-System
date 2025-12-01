@@ -1,0 +1,88 @@
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #2c3e50 0, #000 55%);
+  min-height: 100vh;
+  margin: 0;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.main-card {
+  max-width: 520px;
+  width: 100%;
+  border-radius: 18px;
+  border: none;
+}
+
+.app-title {
+  font-weight: 600;
+}
+
+.result-section h5,
+.preview-section h6 {
+  font-weight: 600;
+}
+
+.result-badge {
+  font-size: 1rem;
+}
+
+.preview-box {
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.signature-preview {
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+/* ===== SIGNGUARD PROFESSIONAL HEADER ===== */
+
+.sg-header {
+  background: #0f172a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sg-logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.4px;
+}
+
+.sg-tagline {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.sg-nav a.sg-link {
+  color: #cbd5e1;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 3px;
+  transition: all 0.2s ease-in-out;
+}
+
+.sg-nav a.sg-link:hover {
+  color: #fff;
+  border-bottom: 2px solid #38bdf8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sg-header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .sg-nav {
+    margin-top: 8px;
+  }
+}

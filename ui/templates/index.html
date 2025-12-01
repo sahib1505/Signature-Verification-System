@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SignGuard – Signature Verification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+
+    <!-- ============================================================= -->
+    <!-- SIGNGUARD PROFESSIONAL HEADER -->
+    <!-- ============================================================= -->
+    <header class="sg-header shadow-sm">
+      <div class="container d-flex justify-content-between align-items-center py-2">
+        
+        <!-- Logo Section -->
+        <div class="d-flex align-items-center">
+          <span class="sg-logo">🛡️ SignGuard</span>
+          <span class="sg-tagline d-none d-md-inline ms-2">
+            AI-Powered Signature Verification
+          </span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sg-nav d-flex gap-3">
+          <a href="{{ url_for('index') }}" class="sg-link">Verify</a>
+          <a href="{{ url_for('register') }}" class="sg-link">Register</a>
+          <a href="#" class="sg-link">About</a>
+        </nav>
+
+      </div>
+    </header>
+    <!-- ============================================================= -->
+    <!-- END HEADER -->
+    <!-- ============================================================= -->
+
+
+    <div class="page-wrapper d-flex align-items-center justify-content-center">
+      <div class="card shadow-lg main-card">
+        <div class="card-body">
+
+          <h1 class="app-title text-center mb-1">Signature Verification</h1>
+          <p class="text-center text-muted mb-4">
+            Upload a signature image and choose the model.
+          </p>
+
+          <form method="post" enctype="multipart/form-data" class="mb-4" id="upload-form">
+            <div class="mb-3">
+              <label for="file" class="form-label fw-semibold">Select signature image</label>
+              <input class="form-control" type="file" id="file" name="file" accept=".png,.jpg,.jpeg" required />
+              <div class="form-text">Supported formats: PNG, JPG, JPEG</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Model type</label>
+              <select class="form-select" name="model_type">
+                <option value="svm" {% if selected_model == 'svm' %}selected{% endif %}>
+                  HOG + SVM (Fast)
+                </option>
+                <option value="cnn" {% if selected_model == 'cnn' %}selected{% endif %}
+                  {% if not cnn_available %}disabled{% endif %}>
+                  CNN (More accurate)
+                </option>
+              </select>
+
+              {% if not cnn_available %}
+              <div class="form-text text-warning">
+                CNN not trained yet. Train it with <code>python -m src.train_cnn</code>.
+              </div>
+              {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Verify Signature</button>
+          </form>
+
+          <div class="mb-3 text-end">
+            <a href="{{ url_for('register') }}" class="small">Register your own signature →</a>
+          </div>
+
+          {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+          {% endif %}
+
+          {% if result %}
+          <div class="result-section mt-3">
+            <h5 class="mb-2">Result</h5>
+
+            <span class="badge rounded-pill px-3 py-2 result-badge
+              {% if result == 'Genuine' %}bg-success{% else %}bg-danger{% endif %}">
+              {{ result }}
+            </span>
+
+            {% if confidence is not none %}
+            <p class="mt-2 mb-0 text-muted">
+              Confidence: <strong>{{ confidence }}%</strong>
+            </p>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if filename %}
+          <div class="preview-section mt-4">
+            <h6 class="mb-2">Signature Preview</h6>
+            <div class="preview-box">
+              <img
+                src="{{ url_for('uploaded_file', filename=filename) }}"
+                alt="Uploaded signature"
+                class="signature-preview"
+              />
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="card-footer text-center small text-muted">
+          Built with Python · HOG + SVM · CNN
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>
